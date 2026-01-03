@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Learning Maze – Coming Soon</title>
+
+  <!-- Basic SEO & Social -->
+  <meta name="description" content="Learning Maze is a fun educational maze game where progress is unlocked by answering quick questions. Coming soon." />
+  <meta property="og:title" content="Learning Maze – Coming Soon" />
+  <meta property="og:description" content="A maze adventure where a genie helps when you’re stuck — answer questions to continue. Coming soon." />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="https://maze.thegreenportfolio.ca/assets/preview.png" />
+  <meta property="og:url" content="https://maze.thegreenportfolio.ca/" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <style>
+    :root{
+      --bg-body:#f5f5f7;
+      --bg:#f5f8f4;
+      --bg-card:#ffffff;
+      --border:#e5e5ea;
+      --pill-bg:#ffffff;
+      --pill-border:#d2d2d7;
+      --accent:#0d8a25;
+      --accent-soft:#e4f4e8;
+      --accent-dark:#0b6a1e;
+      --text:#111111;
+      --sub:#6e6e73;
+      --chip-bg:#f2f2f7;
+      --chip-border:#e5e5ea;
+      --btn-text:#ffffff;
+    }
+
+    @media (prefers-color-scheme: dark){
+      :root{
+        --bg-body:#000000;
+        --bg:#020b05;
+        --bg-card:#1c1c1e;
+        --border:#3a3a3c;
+        --pill-bg:#1c1c1e;
+        --pill-border:#3a3a3c;
+        --accent:#44d965;
+        --accent-soft:#062411;
+        --accent-dark:#2ba448;
+        --text:#f5f5f7;
+        --sub:#a1a1a6;
+        --chip-bg:#2c2c2e;
+        --chip-border:#3a3a3c;
+        --btn-text:#020b05;
+      }
+    }
+
+    *{box-sizing:border-box;}
+    body{
+      margin:0;
+      font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text",system-ui,-system-ui,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+      background:var(--bg-body);
+      color:var(--text);
+      -webkit-font-smoothing:antialiased;
+    }
+    a{color:inherit;text-decoration:none;}
+
+    .page{min-height:100vh;display:flex;flex-direction:column;}
+
+    .hero{
+      background:radial-gradient(circle at top left, var(--accent-soft) 0, var(--bg) 40%, var(--bg-body) 100%);
+      padding:44px 16px 44px;
+      text-align:center;
+    }
+    .hero-inner{max-width:980px;margin:0 auto;}
+
+    .gp-label{
+      letter-spacing:.18em;
+      font-size:11px;
+      text-transform:uppercase;
+      color:var(--sub);
+      margin-bottom:10px;
+    }
+
+    .hero-pill{
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      padding:8px 14px;
+      border-radius:999px;
+      background:var(--pill-bg);
+      border:1px solid var(--pill-border);
+      font-size:13px;
+      white-space:nowrap;
+      margin-bottom:18px;
+    }
+    .hero-pill-icon{
+      width:22px;height:22px;border-radius:6px;object-fit:contain;
+    }
+
+    .hero-title{
+      font-size:clamp(32px,5vw,54px);
+      line-height:1.05;
+      font-weight:700;
+      letter-spacing:-0.03em;
+      margin:0 0 14px;
+    }
+    .hero-subtitle{
+      max-width:720px;
+      margin:0 auto 18px;
+      font-size:18px;
+      color:var(--sub);
+    }
+
+    .chips{
+      display:flex;
+      justify-content:center;
+      flex-wrap:wrap;
+      gap:10px;
+      margin-top:10px;
+    }
+    .chip{
+      border-radius:999px;
+      padding:7px 12px;
+      background:var(--chip-bg);
+      border:1px solid var(--chip-border);
+      font-size:13px;
+      color:var(--sub);
+    }
+
+    .card-shell{
+      max-width:1020px;
+      margin:22px auto 0;
+      padding:0 16px;
+      width:100%;
+    }
+    .card{
+      background:var(--bg-card);
+      border-radius:26px;
+      border:1px solid var(--border);
+      padding:28px 22px 24px;
+      box-shadow:0 10px 26px rgba(0,0,0,.04);
+    }
+    @media (prefers-color-scheme: dark){
+      .card{box-shadow:0 10px 26px rgba(0,0,0,.18);}
+    }
+
+    .section-title{
+      text-align:center;
+      font-size:22px;
+      margin:0 0 8px;
+    }
+    .section-sub{
+      text-align:center;
+      color:var(--sub);
+      font-size:15px;
+      margin:0 auto 18px;
+      max-width:820px;
+      line-height:1.6;
+    }
+
+    .grid{
+      display:grid;
+      grid-template-columns:repeat(2,minmax(0,1fr));
+      gap:12px 14px;
+      margin-top:16px;
+    }
+    .item{
+      text-align:left;
+      background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.02));
+      border:1px solid var(--border);
+      border-radius:20px;
+      padding:14px 14px 12px;
+    }
+    .item-title{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      font-weight:700;
+      margin:0 0 6px;
+      font-size:14px;
+    }
+    .dot{
+      width:9px;height:9px;border-radius:999px;background:var(--accent);
+    }
+    .item-body{
+      margin:0;
+      font-size:13px;
+      color:var(--sub);
+      line-height:1.55;
+    }
+
+    .cta-row{
+      display:flex;
+      justify-content:center;
+      gap:12px;
+      flex-wrap:wrap;
+      margin-top:18px;
+    }
+    .btn,.btn-outline{
+      border-radius:999px;
+      padding:12px 18px;
+      font-weight:600;
+      font-size:14px;
+      border:1px solid transparent;
+      transition:transform .18s ease, box-shadow .18s ease, background .18s ease, border-color .18s ease;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:8px;
+    }
+    .btn{
+      background:var(--accent);
+      color:var(--btn-text);
+      box-shadow:0 10px 22px rgba(0,0,0,.18);
+    }
+    .btn:hover{
+      background:var(--accent-dark);
+      transform:translateY(-1px);
+      box-shadow:0 12px 26px rgba(0,0,0,.22);
+    }
+    .btn-outline{
+      background:var(--pill-bg);
+      color:var(--text);
+      border-color:var(--pill-border);
+    }
+    .btn-outline:hover{transform:translateY(-1px);}
+
+    footer{
+      margin:34px 0 26px;
+      font-size:12px;
+      color:var(--sub);
+      text-align:center;
+      padding:0 16px;
+    }
+    footer a{color:var(--accent);}
+    .footer-links{margin-top:10px;}
+    .footer-links a{
+      display:inline-flex;
+      align-items:center;
+      gap:6px;
+      margin:0 7px;
+      font-size:13px;
+      color:var(--accent);
+    }
+
+    @media (max-width: 820px){
+      .grid{grid-template-columns:minmax(0,1fr);}
+      .hero{padding-top:34px;padding-bottom:40px;}
+      .hero-title{font-size:34px;}
+      .card{padding:24px 18px;}
+    }
+  </style>
+</head>
+
+<body>
+<div class="page">
+
+  <header class="hero">
+    <div class="hero-inner">
+      <div class="gp-label">THE GREEN PORTFOLIO PRESENTS</div>
+
+      <div class="hero-pill">
+        <img class="hero-pill-icon" src="./assets/maze-icon.png" alt="Learning Maze icon" />
+        <span>Learning Maze</span>
+      </div>
+
+      <h1 class="hero-title">Learning Maze – Coming Soon</h1>
+
+      <p class="hero-subtitle">
+        A fun maze adventure where a genie helps when you’re stuck — answer quick questions to continue.
+      </p>
+
+      <div class="chips" aria-label="Highlights">
+        <span class="chip">🧩 Maze + trivia</span>
+        <span class="chip">📚 History • Geography • General Knowledge</span>
+        <span class="chip">📱 Built for iPhone</span>
+        <span class="chip">🔒 Privacy-first</span>
+      </div>
+    </div>
+  </header>
+
+  <section class="card-shell">
+    <div class="card">
+      <h2 class="section-title">How it works</h2>
+      <p class="section-sub">
+        Explore the maze. If you get stuck, a genie appears with a quick 3-answer question.
+        Pick the right answer to unlock the path and keep moving.
+      </p>
+
+      <div class="grid">
+        <div class="item">
+          <div class="item-title"><span class="dot"></span><span>Play in short sessions</span></div>
+          <p class="item-body">Quick levels designed for fun, not stress.</p>
+        </div>
+        <div class="item">
+          <div class="item-title"><span class="dot"></span><span>Learn while you play</span></div>
+          <p class="item-body">Topics start with History, Geography, and General Knowledge.</p>
+        </div>
+        <div class="item">
+          <div class="item-title"><span class="dot"></span><span>Three answers</span></div>
+          <p class="item-body">Simple choices that keep the game flowing.</p>
+        </div>
+        <div class="item">
+          <div class="item-title"><span class="dot"></span><span>More topics later</span></div>
+          <p class="item-body">Math, physics, and more can be added over time.</p>
+        </div>
+      </div>
+
+      <div class="cta-row">
+        <a class="btn" href="mailto:support@thegreenportfolio.ca">Get updates / Contact</a>
+        <a class="btn-outline" href="https://thegreenportfolio.ca">Back to The Green Portfolio</a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>Questions or feedback: <a href="mailto:support@thegreenportfolio.ca">support@thegreenportfolio.ca</a></p>
+    <div class="footer-links">
+      <a href="https://thegreenportfolio.ca">🏡 Home</a>
+      <a href="https://bike.thegreenportfolio.ca" target="_blank" rel="noopener">🚴 Bike</a>
+      <a href="https://goal.thegreenportfolio.ca" target="_blank" rel="noopener">⚽ GOAL</a>
+    </div>
+  </footer>
+
+</div>
+</body>
+</html>
